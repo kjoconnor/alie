@@ -17,6 +17,16 @@ url = "http://localhost:8000"
 lie_tag_name = "alie"
 true_tag_name = "atrue"
 
+[image]
+# In the "content" replace_method, we don't rewrite the tags but instead
+# just serve a random other different image in response to image requests
+# Not yet implemented
+# replace_method = "content"
+# In the "tag" replace_method, we swap out the src attribute for some other
+# random image
+replace_method = "tag"
+replace_source = "assets/replacement-images/"
+
 # Just a list to get started
 # Note that if you lie to things like Googlebot and Facebookbot it will
 # affect search results and link previews and that sort of thing. But maybe

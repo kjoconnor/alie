@@ -1,6 +1,10 @@
+import glob
 import logging
+import os
+import random
 import tomllib
 
+from pathlib import Path
 from urllib.parse import urljoin
 
 import aiohttp
@@ -16,6 +20,7 @@ class Alie:
         self._config = config
         self._session = None
         self._ua_contains = []
+        self._image_replace_method = None
 
         for _, bot in config["bots"].items():
             if bot.get("enabled", True):
@@ -27,12 +32,27 @@ class Alie:
                 )
         logger.debug(f"Bot UAs: {self._ua_contains}")
 
+        if "image" in config.keys():
+            self._image_replace_method = config["image"]["replace_method"]
+            self._images = []
+            for file in glob.glob(os.path.join(config["image"]["replace_source"], "*")):
+                path = Path(file)
+                print(path)
+                print(path.suffix)
+                if path.suffix in (".jpg", ".jpeg", ".png"):
+                    self._images.append(file)
+
+            logger.debug(f"Image list: {self._images}")
+
     async def start(self) -> None:
         self._session = aiohttp.ClientSession()
 
     async def stop(self) -> None:
         if self._session:
             await self._session.close()
+
+    def _get_new_image_src(self) -> str:
+        return random.choice(self._images)
 
     def rewrite(self, content, bot_detected: bool) -> str:
         soup = BeautifulSoup(content, "html.parser")
@@ -50,6 +70,11 @@ class Alie:
             else:
                 true_tag.unwrap()
             rewrite_counter += 1
+
+        if bot_detected and self._image_replace_method == "tag":
+            for img_tag in soup.find_all("img"):
+                img_tag["src"] = self._get_new_image_src()
+                rewrite_counter += 1
 
         logger.debug(f"{rewrite_counter} rewrites performed")
 
