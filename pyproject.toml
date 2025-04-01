@@ -1,0 +1,16 @@
+[project]
+name = "alie"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp[speedups]>=3.11.12",
+    "beautifulsoup4>=4.13.3",
+    "zstandard>=0.23.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipdb>=0.13.13",
+    "ipython>=9.0.2",
+]

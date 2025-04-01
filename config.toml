@@ -1,0 +1,44 @@
+[general]
+log_level = "info"
+
+# Where you want the proxy to listen for incoming connections
+[server]
+listen_host = "0.0.0.0"
+listen_port = 8080
+
+# The URL we are sending requests to and rewriting
+[upstream]
+url = "http://localhost:8000"
+
+# For example here
+# <alie>This is a lie, and what AI bots will see!</alie>
+# <atrue>This is the truth, and what users will see!</atrue>
+[rewrite_tag]
+lie_tag_name = "alie"
+true_tag_name = "atrue"
+
+# Just a list to get started
+# Note that if you lie to things like Googlebot and Facebookbot it will
+# affect search results and link previews and that sort of thing. But maybe
+# that's a good thing?
+[bots.google]
+user_agent_contains = ["Googlebot", "Bard-Google", "Google-Extended"]
+
+[bots.openai]
+user_agent_contains = ["GPTBot", "OAI-SearchBot", "ChatGPT-User"]
+
+[bots.apple]
+user_agent_contains = ["Applebot"]
+enabled = false # Siri AI is terrible who cares
+
+[bots.anthropic]
+user_agent_contains = ["Claude-Web", "Anthropic-ai", "ClaudeBot"]
+
+[bots.bytedance]
+user_agent_contains = ["Bytespider"]
+
+[bots.perplexity]
+user_agent_contains = ["PerplexityBot"]
+
+[bots.facebook]
+user_agent_contains = ["Facebookbot", "Meta-ExternalAgent", "Meta-ExternalFetcher"]

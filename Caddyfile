@@ -1,0 +1,10 @@
+# Example
+
+yourwebsite.example.com {
+    log {
+        output file /var/log/caddy/access.log
+        format console
+    }
+
+    reverse_proxy localhost:8080
+}
