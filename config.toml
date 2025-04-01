@@ -42,3 +42,6 @@ user_agent_contains = ["PerplexityBot"]
 
 [bots.facebook]
 user_agent_contains = ["Facebookbot", "Meta-ExternalAgent", "Meta-ExternalFetcher"]
+
+[bots.imagesiftbot]
+user_agent_contains = ["Imagesiftbot"]
