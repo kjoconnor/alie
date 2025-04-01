@@ -45,6 +45,16 @@ We use `uv` for package management.
 
 `uv run main.py`
 
+You can also now turn on image swapping with the following block in your `config.toml`:
+
+```toml
+[image]
+replace_method = "tag"
+replace_source = "assets/replacement-images/"
+```
+
+This will change the `src` of any image attribute it comes across to a random image from the `assets/replacement-images/` directory.
+
 ## Credits
 
 * [dog.jpg](https://commons.wikimedia.org/wiki/File:Cute_dog.jpg)
