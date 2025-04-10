@@ -35,6 +35,11 @@ replace_source = "assets/replacement-images/"
 user_agent_contains = ["Googlebot", "Bard-Google", "Google-Extended"]
 
 [bots.openai]
+# https://platform.openai.com/docs/bots
+# Note that this affects ALL access from OpenAI, not just crawling. It will
+# lie in direct response to user requests. Only block "GPTBot" if you only
+# wish to block crawling, like this:
+# user_agent_contains = ["GPTBot"]
 user_agent_contains = ["GPTBot", "OAI-SearchBot", "ChatGPT-User"]
 
 [bots.apple]
@@ -42,6 +47,11 @@ user_agent_contains = ["Applebot"]
 enabled = false # Siri AI is terrible who cares
 
 [bots.anthropic]
+# https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
+# Note that this affects ALL access from Anthropic, not just crawling. It will
+# lie in direct response to user requests. Only block "ClaudeBot" if you only
+# wish to block crawling, like this:
+# user_agent_contains = ["ClaudeBot"]
 user_agent_contains = ["Claude-Web", "Anthropic-ai", "ClaudeBot"]
 
 [bots.bytedance]
